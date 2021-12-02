@@ -34,6 +34,16 @@ namespace csharp_product_crud_api.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("all", builder =>
+                {
+                    builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -55,6 +65,8 @@ namespace csharp_product_crud_api.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "csharp_product_crud_api.Api v1"));
             }
+
+            app.UseCors("all");
 
             app.UseHttpsRedirection();
 

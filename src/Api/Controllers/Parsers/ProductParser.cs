@@ -11,6 +11,7 @@ namespace csharp_product_crud_api.Api.Controllers.Parsers
         {
             return new ProductDto
             {
+                Id = product.Id,
                 Name = product.Name,
                 Price = "R$ " + (product.Price / 100M).ToString("C")
             };

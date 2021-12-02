@@ -18,8 +18,9 @@ namespace csharp_product_crud_api.Api.Core.Infrastructure.ProductAgg.Repositorie
 
         public ICollection<Product> SearchByName(string name)
         {
-            return _product.Where(product => product.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-                .ToImmutableList();
+            return _product.ToImmutableList();
+            // return _product.Where(product => product.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            //     .ToImmutableList();
         }
     }
 }
