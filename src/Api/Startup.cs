@@ -12,6 +12,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
+using csharp_product_crud_api.Api.Core.Domain.ProductAgg.Repositories;
+using csharp_product_crud_api.Api.Core.Infrastructure.ProductAgg.Repositories;
+using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices;
+using csharp_product_crud_api.Api.Controllers.Parsers;
+using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Parsers;
+using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
+using csharp_product_crud_api.Api.Core.Domain.ProductAgg.Entities;
+
 namespace csharp_product_crud_api.Api
 {
     public class Startup
@@ -32,6 +40,10 @@ namespace csharp_product_crud_api.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "csharp_product_crud_api.Api", Version = "v1" });
             });
+
+            services.AddSingleton<IProductRepositorie, ProductRepositorie>();
+            services.AddTransient<ProductAppService>();
+            services.AddSingleton<IParser<Product, IProduct>, ProductParser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
