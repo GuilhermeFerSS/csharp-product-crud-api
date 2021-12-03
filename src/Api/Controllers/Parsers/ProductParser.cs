@@ -11,8 +11,21 @@ namespace csharp_product_crud_api.Api.Controllers.Parsers
         {
             return new ProductDto
             {
-                Id = product.Id,
+                Id = product.ExternalId,
                 Name = product.Name,
+                Price = product.Price.ToString()
+            };
+        }
+    }
+
+    public class ProductReportParser : IParser<Product, IProduct>
+    {
+        public IProduct Parse(Product product)
+        {
+            return new ProductDto
+            {
+                Id = product.ExternalId,
+                Name = product.Name.ToUpper(),
                 Price = "R$ " + (product.Price / 100M).ToString("C")
             };
         }

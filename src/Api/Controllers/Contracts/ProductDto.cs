@@ -4,7 +4,7 @@ namespace csharp_product_crud_api.Api.Controllers.Contracts
 {
     public class ProductDto : IProduct
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
     }

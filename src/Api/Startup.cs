@@ -19,6 +19,8 @@ using csharp_product_crud_api.Api.Controllers.Parsers;
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Parsers;
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
 using csharp_product_crud_api.Api.Core.Domain.ProductAgg.Entities;
+using csharp_product_crud_api.Api.Core.Infrastructure.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace csharp_product_crud_api.Api
 {
@@ -51,9 +53,15 @@ namespace csharp_product_crud_api.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "csharp_product_crud_api.Api", Version = "v1" });
             });
 
+            services.AddDbContext<RequestDbContext>(options =>
+            {
+                options
+                    .UseSqlite(Configuration.GetConnectionString("Sqlite"));
+            });
+
             services.AddSingleton<IProductRepositorie, ProductRepositorie>();
             services.AddTransient<ProductAppService>();
-            services.AddSingleton<IParser<Product, IProduct>, ProductParser>();
+            services.AddSingleton<IProductParseFactory, ProductParseFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

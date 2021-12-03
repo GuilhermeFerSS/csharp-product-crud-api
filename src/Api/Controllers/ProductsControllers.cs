@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices;
 using csharp_product_crud_api.Api.Controllers.Contracts;
-using System.Linq;
+using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
 
 namespace csharp_product_crud_api.Api.Controllers
 {
@@ -28,13 +30,6 @@ namespace csharp_product_crud_api.Api.Controllers
         {
             var products = _appService.SearchByName(name);
             return Ok(products);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(long id)
-        {
-            var products = _appService.SearchByName(null);
-            return Ok(products.First(x => x.Id == id));
         }
     }
 }
