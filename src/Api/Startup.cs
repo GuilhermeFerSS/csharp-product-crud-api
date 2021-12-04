@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -51,6 +52,16 @@ namespace csharp_product_crud_api.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "csharp_product_crud_api.Api", Version = "v1" });
             });
 
+            services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.Authority = "https://dev-67xxsxv4.us.auth0.com/";
+            options.Audience = "https://csharp-product-crud-api.com.br";
+        });
+
             services.AddSingleton<IProductRepositorie, ProductRepositorie>();
             services.AddTransient<ProductAppService>();
             services.AddSingleton<IParser<Product, IProduct>, ProductParser>();
@@ -72,11 +83,14 @@ namespace csharp_product_crud_api.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()
+                    .RequireAuthorization();
             });
         }
     }
