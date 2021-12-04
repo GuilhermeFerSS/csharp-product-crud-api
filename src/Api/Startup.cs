@@ -21,6 +21,7 @@ using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
 using csharp_product_crud_api.Api.Core.Domain.ProductAgg.Entities;
 using csharp_product_crud_api.Api.Core.Infrastructure.Shared;
 using Microsoft.EntityFrameworkCore;
+using csharp_product_crud_api.Api.Core.Domain.Shared.Repositories;
 
 namespace csharp_product_crud_api.Api
 {
@@ -59,16 +60,19 @@ namespace csharp_product_crud_api.Api
                     .UseSqlite(Configuration.GetConnectionString("Sqlite"));
             });
 
-            services.AddSingleton<IProductRepositorie, ProductRepositorie>();
-            services.AddTransient<ProductAppService>();
+            services.AddScoped<IProductRepositorie, ProductRepositorie>();
+            services.AddScoped<ProductAppService>();
             services.AddSingleton<IProductParseFactory, ProductParseFactory>();
+            services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<RequestDbContext>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RequestDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
+                dbContext.Database.EnsureCreated();
+                dbContext.Database.Migrate();
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "csharp_product_crud_api.Api v1"));
