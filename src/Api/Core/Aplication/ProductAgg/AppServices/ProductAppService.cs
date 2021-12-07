@@ -37,5 +37,12 @@ namespace csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices
             var products = _repositorie.SearchByName(name);
             return products.Select(_parseFactory.GetProductReportParse().Parse).ToImmutableList();
         }
+
+        public void Delete(string id)
+        {
+            var product = _repositorie.GetById(id);
+            product.Delete();
+            _unitOfWork.SaveChanges();
+        }
     }
 }

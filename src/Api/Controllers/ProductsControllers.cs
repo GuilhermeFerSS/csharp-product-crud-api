@@ -31,5 +31,13 @@ namespace csharp_product_crud_api.Api.Controllers
             var products = _appService.SearchByName(name);
             return Ok(products);
         }
+
+        [HttpDelete("{id}")]
+
+        public IActionResult Delete(string id)
+        {
+            _appService.Delete(id);
+            return NoContent();
+        }
     }
 }

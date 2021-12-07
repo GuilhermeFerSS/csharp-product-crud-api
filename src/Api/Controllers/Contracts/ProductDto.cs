@@ -7,5 +7,6 @@ namespace csharp_product_crud_api.Api.Controllers.Contracts
         public string Id { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -13,7 +13,8 @@ namespace csharp_product_crud_api.Api.Controllers.Parsers
             {
                 Id = product.ExternalId,
                 Name = product.Name,
-                Price = product.Price.ToString()
+                Price = product.Price.ToString(),
+                Status = product.Status
             };
         }
     }
@@ -26,7 +27,8 @@ namespace csharp_product_crud_api.Api.Controllers.Parsers
             {
                 Id = product.ExternalId,
                 Name = product.Name.ToUpper(),
-                Price = "R$ " + (product.Price / 100M).ToString("C")
+                Price = "R$ " + (product.Price / 100M).ToString("C"),
+                Status = product.Status
             };
         }
     }
