@@ -48,3 +48,35 @@
 #### Delete Product
 - Method: Delete
 - URL: `https://localhost:5001/products/{productId}`
+
+<br />
+<br />
+
+## Collaborators
+
+<!-- readme: contributors -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/bernardoroliveira">
+            <img src="https://avatars.githubusercontent.com/bernardoroliveira" width="80;" alt="akhilmhdh"/>
+            <br />
+            <sub><b>Bernardo Rodrigues</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/guilhermeferss">
+            <img src="https://avatars.githubusercontent.com/guilhermeferss" width="80;" alt="matks"/>
+            <br />
+            <sub><b>Guilherme Fernandes</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/joaobreder">
+            <img src="https://avatars.githubusercontent.com/joaobreder" width="80;" alt="matks"/>
+            <br />
+            <sub><b>João Breder</b></sub>
+        </a>
+    </td>
+</table>
+<!-- readme: contributors -end -->
