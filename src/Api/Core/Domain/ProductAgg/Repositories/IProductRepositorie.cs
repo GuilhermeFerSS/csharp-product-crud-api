@@ -7,5 +7,6 @@ namespace csharp_product_crud_api.Api.Core.Domain.ProductAgg.Repositories
     {
         void Create(Product product);
         ICollection<Product> SearchByName(string name);
+        Product GetById(string id);
     }
 }

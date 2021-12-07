@@ -8,6 +8,7 @@ using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Parsers;
 using csharp_product_crud_api.Api.Core.Infrastructure.Shared;
 using csharp_product_crud_api.Api.Core.Domain.Shared.Repositories;
+using csharp_product_crud_api.Api.Controllers.Contracts;
 
 namespace csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices
 {
@@ -36,6 +37,20 @@ namespace csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices
         {
             var products = _repositorie.SearchByName(name);
             return products.Select(_parseFactory.GetProductReportParse().Parse).ToImmutableList();
+        }
+
+        public IProduct GetById(string id)
+        {
+            var product = _repositorie.GetById(id);
+            return _parseFactory.GetProductParse().Parse(product);
+        }
+
+        public IProduct Update(string id, IUpdateProduct updateProduct)
+        {
+            var product = _repositorie.GetById(id);
+            product.Update(updateProduct);
+            _unitOfWork.SaveChanges();
+            return _parseFactory.GetProductParse().Parse(product);
         }
 
         public void Delete(string id)

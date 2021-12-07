@@ -32,5 +32,10 @@ namespace csharp_product_crud_api.Api.Core.Infrastructure.ProductAgg.Repositorie
                 .Where(product => product.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 .ToImmutableList();
         }
+
+        public Product GetById(string id)
+        {
+            return _context.Set<Product>().FirstOrDefault(x => x.ExternalId == id);
+        }
     }
 }

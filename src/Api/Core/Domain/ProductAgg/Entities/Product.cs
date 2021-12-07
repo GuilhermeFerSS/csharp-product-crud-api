@@ -1,4 +1,5 @@
 using System;
+using csharp_product_crud_api.Api.Controllers.Contracts;
 
 namespace csharp_product_crud_api.Api.Core.Domain.ProductAgg.Entities
 {
@@ -21,6 +22,12 @@ namespace csharp_product_crud_api.Api.Core.Domain.ProductAgg.Entities
         public string Name { get; private set; }
         public long Price { get; private set; }
         public string Status { get; private set; }
+
+        public void Update(IUpdateProduct updateProduct)
+        {
+            Name = updateProduct.Name;
+            Price = updateProduct.Price;
+        }
 
         internal void Delete()
         {

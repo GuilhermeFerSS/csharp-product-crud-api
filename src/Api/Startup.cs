@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 using csharp_product_crud_api.Api.Core.Domain.ProductAgg.Repositories;
@@ -18,8 +11,6 @@ using csharp_product_crud_api.Api.Core.Infrastructure.ProductAgg.Repositories;
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices;
 using csharp_product_crud_api.Api.Controllers.Parsers;
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Parsers;
-using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
-using csharp_product_crud_api.Api.Core.Domain.ProductAgg.Entities;
 using csharp_product_crud_api.Api.Core.Infrastructure.Shared;
 using Microsoft.EntityFrameworkCore;
 using csharp_product_crud_api.Api.Core.Domain.Shared.Repositories;
@@ -61,8 +52,8 @@ namespace csharp_product_crud_api.Api
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
-                options.Authority = "https://dev-67xxsxv4.us.auth0.com/";
-                options.Audience = "https://csharp-product-crud-api.com.br";
+                options.Authority = "https://tiagor87.auth0.com/";
+                options.Audience = "https://pedido-api.unifeso-poo.com.br";
             });
 
             services.AddDbContext<RequestDbContext>(options =>

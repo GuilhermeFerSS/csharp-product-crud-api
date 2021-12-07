@@ -29,11 +29,24 @@ namespace csharp_product_crud_api.Api.Controllers
         public IActionResult Query(string name)
         {
             var products = _appService.SearchByName(name);
-            return Ok(products);
+            return Ok(new { data = products });
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(string id)
+        {
+            var product = _appService.GetById(id);
+            return Ok(new { data = product });
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, UpdateProductDto updateProduct)
+        {
+            var product = _appService.Update(id, updateProduct);
+            return Ok(new { data = product });
         }
 
         [HttpDelete("{id}")]
-
         public IActionResult Delete(string id)
         {
             _appService.Delete(id);
