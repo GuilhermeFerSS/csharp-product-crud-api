@@ -1,9 +1,9 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices;
 using csharp_product_crud_api.Api.Controllers.Contracts;
-using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Contracts;
+using csharp_product_crud_api.Api.Controllers.Extensions;
 
 namespace csharp_product_crud_api.Api.Controllers
 {
@@ -22,28 +22,28 @@ namespace csharp_product_crud_api.Api.Controllers
         public IActionResult Add(CreateProductDto createProductDto)
         {
             var product = _appService.Create(createProductDto);
-            return Created(Request.Path, product);
+            return product.AsResponse(HttpStatusCode.Created);
         }
 
         [HttpGet]
         public IActionResult Query(string name)
         {
             var products = _appService.SearchByName(name);
-            return Ok(new { data = products });
+            return products.AsResponse(HttpStatusCode.OK);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(string id)
         {
             var product = _appService.GetById(id);
-            return Ok(new { data = product });
+            return product.AsResponse(HttpStatusCode.OK);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(string id, UpdateProductDto updateProduct)
         {
             var product = _appService.Update(id, updateProduct);
-            return Ok(new { data = product });
+            return product.AsResponse(HttpStatusCode.OK);
         }
 
         [HttpDelete("{id}")]

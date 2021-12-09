@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -42,6 +43,12 @@ namespace csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices
         public IProduct GetById(string id)
         {
             var product = _repositorie.GetById(id);
+
+            if (product == null)
+            {
+                throw new NotFoundException(nameof(product), id);
+            }
+            
             return _parseFactory.GetProductParse().Parse(product);
         }
 
@@ -58,6 +65,14 @@ namespace csharp_product_crud_api.Api.Core.Aplication.ProductAgg.AppServices
             var product = _repositorie.GetById(id);
             product.Delete();
             _unitOfWork.SaveChanges();
+        }
+    }
+
+    public sealed class NotFoundException : Exception
+    {
+        public NotFoundException(string entityName, string id) : base($"{entityName} could not be found.")
+        {
+            Data.Add(nameof(id), id);
         }
     }
 }

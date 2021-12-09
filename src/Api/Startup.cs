@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ using csharp_product_crud_api.Api.Core.Aplication.ProductAgg.Parsers;
 using csharp_product_crud_api.Api.Core.Infrastructure.Shared;
 using Microsoft.EntityFrameworkCore;
 using csharp_product_crud_api.Api.Core.Domain.Shared.Repositories;
+using Newtonsoft.Json;
 
 namespace csharp_product_crud_api.Api
 {
@@ -85,6 +87,8 @@ namespace csharp_product_crud_api.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseAuthentication();
 
